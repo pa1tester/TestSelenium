@@ -24,6 +24,7 @@ public class AddToCart {
 	  
 	 @After
 	 public void tearDown() {
+	  //deliberelty not closing the web browser to see output
 	  //  driver.quit();
 	 }
 	 
@@ -45,10 +46,13 @@ public class AddToCart {
 				//click on dresses
 				elements.get(3).click();
 				
-				List<WebElement> productElements  = driver.findElements( By.xpath("//div[@class='product-container']")); 
+				//gets product container div elements 
+				List<WebElement> productElements  = driver.findElements( By.xpath("//div[@class='product-container']"));
+				//retrieve prices span tag
 				List<WebElement> productPrices = driver.findElements(By.xpath("//span[@class='price product-price']"));
+				//gets addTocart button for hover-over dress
 				List<WebElement> addToCart = driver.findElements(By.xpath("//a[@class='button ajax_add_to_cart_button btn btn-default']"));
-				
+	
 				
 				double highestPrice = 0.0;
 				int highestPriceIndex = -1;
@@ -57,6 +61,7 @@ public class AddToCart {
 					String productPrice = productPrices.get(i).getAttribute("innerText").trim().substring(1);
 					double price = Double.parseDouble(productPrice);
 				
+					//find highest price product ad storing the index of the product
 					if(price > highestPrice)	{
 						highestPrice = price;
 						highestPriceIndex = i/2;
